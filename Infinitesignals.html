@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>InfiniteSignals — Real-Time Crypto & Forex Trading Signals on Telegram</title>
+<meta name="description" content="InfiniteSignals sends real-time crypto and forex entry, target, and stop-loss alerts to your Telegram channel. Timestamped, tracked, and built for traders who want clarity, not noise.">
+<meta name="keywords" content="crypto signals telegram, forex signals telegram, telegram trading bot, bitcoin signals, gold signals, forex signals, crypto trading bot, xauusd signals">
+<link rel="canonical" href="https://www.infinitesignals.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="InfiniteSignals — Real-Time Crypto & Forex Trading Signals on Telegram">
+<meta property="og:description" content="Timestamped crypto and forex entry, target, and stop-loss alerts delivered to your Telegram channel. No hype, no guarantees — just tracked, transparent signals.">
+<meta property="og:url" content="https://www.infinitesignals.io/">
+<meta property="og:site_name" content="InfiniteSignals">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="InfiniteSignals — Crypto & Forex Trading Signals on Telegram">
+<meta name="twitter:description" content="Real-time crypto and forex entry, target, and stop-loss alerts on Telegram. Every signal timestamped and tracked.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "InfiniteSignals",
+  "url": "https://www.infinitesignals.io/",
+  "description": "Real-time crypto and forex trading signal service delivered via Telegram, providing timestamped entry, target, and stop-loss alerts.",
+  "sameAs": ["https://t.me/infinitesignals", "https://instagram.com/infinitesignals"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is this financial advice?", "acceptedAnswer": { "@type": "Answer", "text": "No. InfiniteSignals shares trade ideas for educational purposes only. Crypto and forex markets are volatile and every trade carries risk of loss — always size positions and manage risk yourself." } },
+    { "@type": "Question", "name": "Do you cover forex, or only crypto?", "acceptedAnswer": { "@type": "Answer", "text": "Both. InfiniteSignals posts crypto signals for major exchanges and forex signals for majors, minors, and metals like XAU/USD, formatted for MT4 and MT5." } },
+    { "@type": "Question", "name": "Is InfiniteSignals on Telegram or Instagram?", "acceptedAnswer": { "@type": "Answer", "text": "Telegram is the main channel where every signal is posted first. The Instagram page mirrors highlights and recaps, but Telegram is the fastest and most complete way to receive alerts." } },
+    { "@type": "Question", "name": "How often are signals sent?", "acceptedAnswer": { "@type": "Answer", "text": "Between 5 and 8 signals per week across both markets, only when a setup meets the screening criteria." } },
+    { "@type": "Question", "name": "Is it free to join?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Telegram channel and Instagram page are both free to join, with no paid tiers." } }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --bg:#060911;
+    --panel:#0C111E;
+    --panel-2:#101728;
+    --line:rgba(255,255,255,0.09);
+    --line-strong:rgba(255,255,255,0.16);
+    --blue:#3B82F6;
+    --cyan:#22D3EE;
+    --tg:#29A9EB;
+    --tg-dark:#1E96D6;
+    --text:#F4F7FC;
+    --muted:#8A94AB;
+    --long:#34D399;
+    --short:#FB7185;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;overflow-x:hidden;
+    background:var(--bg);color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;line-height:1.16;margin:0;letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+  section{padding:64px 0;}
+  .muted{color:var(--muted);}
+  .eyebrow{display:flex;align-items:center;gap:9px;color:var(--blue);font-size:13px;font-weight:600;margin-bottom:14px;}
+  .eyebrow .dot{width:6px;height:6px;background:var(--blue);border-radius:50%;box-shadow:0 0 10px var(--blue);flex-shrink:0;}
+
+  .glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;}
+  .glow-blue{background:radial-gradient(circle,rgba(59,130,246,.35),transparent 70%);}
+  .glow-cyan{background:radial-gradient(circle,rgba(34,211,238,.25),transparent 70%);}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 22px;border-radius:8px;font-size:14.5px;font-weight:600;
+    cursor:pointer;border:1px solid transparent;transition:transform .15s ease,background .15s ease,border-color .15s ease;
+    white-space:nowrap;width:100%;
+  }
+  .btn svg{flex-shrink:0;}
+  .btn-telegram{background:linear-gradient(135deg,var(--tg),var(--tg-dark));color:#fff;box-shadow:0 10px 26px -10px rgba(41,169,235,.7);}
+  .btn-telegram:active{transform:scale(.98);}
+  .btn-ghost{border-color:var(--line-strong);color:var(--text);background:rgba(255,255,255,.02);}
+  .btn-ghost:active{transform:scale(.98);}
+  .btn-row{display:flex;flex-direction:column;gap:12px;}
+  .icon-link{
+    display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;
+    border-radius:50%;border:1px solid var(--line-strong);color:var(--muted);flex-shrink:0;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .icon-link:hover{color:var(--text);border-color:var(--line-strong);}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(6,9,17,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+  header .bar{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .logo{display:flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:600;}
+  .logo-mark{width:20px;height:20px;flex-shrink:0;}
+  nav.primary-nav{display:none;}
+  .header-actions{display:flex;align-items:center;gap:10px;}
+  .header-actions .btn{width:auto;padding:10px 16px;}
+  .header-actions .btn-instagram{display:none;}
+  .menu-toggle{background:none;border:1px solid var(--line-strong);border-radius:7px;color:var(--text);cursor:pointer;padding:8px;display:flex;}
+
+  .mobile-panel{
+    position:fixed;inset:0;top:57px;background:var(--bg);z-index:55;
+    transform:translateX(100%);transition:transform .25s ease;
+    padding:24px 20px;overflow-y:auto;
+  }
+  .mobile-panel.open{transform:translateX(0);}
+  .mobile-panel a.nav-link{display:block;padding:16px 4px;border-bottom:1px solid var(--line);font-size:17px;font-weight:500;}
+  .mobile-panel .btn-row{margin-top:24px;}
+  .mobile-panel .secondary-link{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14.5px;color:var(--muted);}
+
+  .hero{position:relative;padding:44px 0 56px;overflow:hidden;}
+  .hero .glow-blue{width:340px;height:340px;top:-140px;right:-100px;}
+  .hero .glow-cyan{width:260px;height:260px;bottom:-100px;left:-80px;}
+  .hero-inner{position:relative;z-index:1;}
+  .hero h1{font-size:clamp(1.9rem,7vw,3.2rem);letter-spacing:-0.02em;}
+  .hero h1 .grad{background:linear-gradient(100deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p.lede{font-size:16.5px;color:var(--muted);margin-top:18px;max-width:46ch;}
+  .hero .btn-row{margin-top:26px;}
+  .trust-line{margin-top:22px;font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;}
+  .trust-line svg{flex-shrink:0;margin-top:2px;}
+  .also-on{margin-top:14px;font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+  .also-on a{color:var(--text);font-weight:500;display:inline-flex;align-items:center;gap:5px;}
+
+  .tabs{display:flex;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:4px;margin-top:36px;}
+  .tab-btn{flex:1;padding:10px 0;border-radius:6px;border:none;background:none;color:var(--muted);font-weight:600;font-size:13.5px;cursor:pointer;transition:background .15s ease,color .15s ease;}
+  .tab-btn.active{background:var(--blue);color:#fff;}
+
+  .signal-card{
+    margin-top:14px;background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line-strong);border-radius:14px;padding:22px;
+    box-shadow:0 20px 50px -24px rgba(0,0,0,.7);
+  }
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;animation:fadein .3s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+  .signal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
+  .pair{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;}
+  .side-tag{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;padding:4px 10px;border-radius:5px;background:rgba(52,211,153,.14);color:var(--long);}
+  .live{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);margin-top:6px;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--long);position:relative;flex-shrink:0;}
+  .live-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--long);animation:pulse 2.2s ease-out infinite;}
+  @keyframes pulse{0%{transform:scale(.6);opacity:.9;}100%{transform:scale(2.1);opacity:0;}}
+  @media (prefers-reduced-motion: reduce){.live-dot::after,.tab-panel.active{animation:none;}}
+  .signal-rows{border-top:1px solid var(--line);}
+  .signal-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .signal-row span:first-child{color:var(--muted);}
+  .signal-row span:last-child{font-family:'IBM Plex Mono',monospace;}
+  .signal-row.target span:last-child{color:var(--long);}
+  .signal-row.stop span:last-child{color:var(--short);}
+  .signal-note{margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.5;}
+
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;}
+  .stat{padding:28px 16px;border-top:1px solid var(--line);border-left:none;}
+  .stat:nth-child(1),.stat:nth-child(2){border-top:none;}
+  .stat:nth-child(2n){border-left:1px solid var(--line);}
+  .stat .num{font-family:'IBM Plex Mono',monospace;font-size:clamp(20px,5vw,28px);color:var(--blue);}
+  .stat .label{margin-top:6px;font-size:12.5px;color:var(--muted);}
+  .stats-footnote{padding:16px 0 0;font-size:11.5px;color:var(--muted);text-align:center;}
+
+  .section-head{max-width:640px;margin-bottom:36px;}
+  .section-head h2{font-size:clamp(1.5rem,5.5vw,2.1rem);}
+  .section-head p{margin-top:12px;color:var(--muted);font-size:15px;}
+
+  .steps{display:flex;flex-direction:column;}
+  .step{display:grid;grid-template-columns:36px 1fr;gap:14px;padding:24px 0;border-top:1px solid var(--line);}
+  .step:last-child{border-bottom:1px solid var(--line);}
+  .step-num{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--blue);padding-top:2px;}
+  .step h3{font-size:17px;margin-bottom:6px;}
+  .step p{color:var(--muted);font-size:14.5px;}
+
+  .markets-grid{display:flex;flex-direction:column;gap:16px;}
+  .market-card{border:1px solid var(--line);border-radius:12px;padding:26px;position:relative;overflow:hidden;background:var(--panel);}
+  .market-card.crypto{border-left:3px solid var(--blue);}
+  .market-card.forex{border-left:3px solid var(--cyan);}
+  .market-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .market-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .market-card.crypto .market-icon{background:rgba(59,130,246,.14);color:var(--blue);}
+  .market-card.forex .market-icon{background:rgba(34,211,238,.14);color:var(--cyan);}
+  .market-card h3{font-size:18px;}
+  .market-card p{color:var(--muted);font-size:14.5px;margin-top:2px;}
+  .pair-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .chip{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:6px 11px;border:1px solid var(--line);border-radius:20px;color:var(--text);}
+
+  .proof{display:flex;flex-direction:column;gap:40px;}
+  .proof-quote{font-family:'Space Grotesk',sans-serif;font-size:20px;line-height:1.4;border-left:2px solid var(--blue);padding-left:20px;}
+  .proof-quote .cite{display:block;margin-top:14px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted);font-weight:400;}
+  .feature-list{display:flex;flex-direction:column;}
+  .feature-item{display:flex;gap:14px;padding:20px 0;border-top:1px solid var(--line);}
+  .feature-item:last-child{border-bottom:1px solid var(--line);}
+  .feature-item svg{flex-shrink:0;margin-top:2px;color:var(--blue);}
+  .feature-item h4{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;margin-bottom:4px;}
+  .feature-item p{color:var(--muted);font-size:14px;}
+
+  .showcase{display:flex;flex-direction:column;gap:36px;align-items:center;}
+  .phone{background:var(--panel);border:1px solid var(--line-strong);border-radius:22px;padding:12px;max-width:260px;width:100%;box-shadow:0 30px 60px -30px rgba(0,0,0,.8);}
+  .phone-screen{background:var(--bg);border-radius:14px;padding:16px;}
+  .phone-header{display:flex;align-items:center;gap:9px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px;}
+  .phone-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--tg),var(--tg-dark));flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .phone-name{font-size:13px;font-weight:600;}
+  .phone-sub{font-size:11px;color:var(--muted);}
+  .dm-bubble{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:13px;font-size:12px;margin-bottom:10px;}
+  .dm-bubble .pair{font-size:13.5px;margin-bottom:7px;}
+  .dm-line{display:flex;justify-content:space-between;padding:4px 0;color:var(--muted);}
+  .dm-line b{font-family:'IBM Plex Mono',monospace;font-weight:500;color:var(--text);}
+  .showcase-text{text-align:center;}
+  .showcase-text h2{font-size:clamp(1.3rem,4.5vw,1.7rem);}
+
+  .testi-grid{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+  .testi{padding:24px 0;border-bottom:1px solid var(--line);}
+  .testi p{font-size:14.5px;}
+  .testi .who{margin-top:12px;font-size:12.5px;color:var(--muted);}
+
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{width:100%;text-align:left;background:none;border:none;color:var(--text);padding:18px 0;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:16px;}
+  .faq-q .icon{transition:transform .2s ease;flex-shrink:0;color:var(--blue);}
+  .faq-item.open .faq-q .icon{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-a p{color:var(--muted);font-size:14px;padding-bottom:18px;}
+
+  .final-cta{text-align:center;padding:72px 0;position:relative;overflow:hidden;}
+  .final-cta .glow-blue{width:300px;height:300px;top:-100px;left:50%;transform:translateX(-50%);}
+  .final-cta h2{font-size:clamp(1.6rem,6vw,2.4rem);position:relative;z-index:1;}
+  .final-cta p{color:var(--muted);margin:14px auto 26px;max-width:44ch;position:relative;z-index:1;}
+  .final-cta .btn-row{max-width:320px;margin:0 auto;position:relative;z-index:1;}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 28px;}
+  .footer-top{display:flex;flex-direction:column;gap:28px;margin-bottom:28px;}
+  .footer-cols{display:flex;gap:40px;flex-wrap:wrap;}
+  .footer-col h5{font-size:12.5px;margin-bottom:12px;color:var(--text);font-weight:600;}
+  .footer-col a{display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--muted);padding:5px 0;}
+  .disclaimer{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;line-height:1.6;}
+  .bottom-row{display:flex;flex-direction:column;gap:8px;margin-top:16px;font-size:12px;color:var(--muted);}
+
+  a.skip-link{position:absolute;left:-999px;top:0;background:var(--blue);color:#fff;padding:10px 16px;z-index:100;}
+  a.skip-link:focus{left:16px;top:16px;}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+
+  @media (min-width:640px){
+    .wrap{padding:0 32px;}
+    .btn{width:auto;}
+    .btn-row{flex-direction:row;}
+    .stats-grid{grid-template-columns:repeat(4,1fr);}
+    .stat{border-top:none;border-left:1px solid var(--line);padding:36px 24px;}
+    .stat:first-child{border-left:none;}
+    .stat:nth-child(1),.stat:nth-child(2){border-top:none;}
+    .markets-grid{flex-direction:row;}
+    .market-card{flex:1;}
+    .final-cta .btn-row{max-width:none;display:inline-flex;}
+  }
+
+  @media (min-width:960px){
+    section{padding:100px 0;}
+    .hero{padding:80px 0 100px;}
+    .hero-inner{display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center;}
+    .hero .tabs,.hero .signal-card{margin-top:0;}
+    .hero-visual{align-self:start;margin-top:8px;}
+    .hero p.lede{font-size:18px;}
+    nav.primary-nav{display:flex;gap:32px;}
+    nav.primary-nav a{font-size:14.5px;color:var(--muted);transition:color .15s ease;}
+    nav.primary-nav a:hover{color:var(--text);}
+    .menu-toggle,.mobile-panel{display:none;}
+    .header-actions .btn-instagram{display:inline-flex;}
+    .section-head{margin-bottom:52px;}
+    .proof{display:grid;grid-template-columns:0.85fr 1.15fr;gap:72px;align-items:start;}
+    .showcase{flex-direction:row;text-align:left;align-items:center;gap:64px;}
+    .showcase-text{text-align:left;}
+    .phone{margin:0;}
+    .testi-grid{flex-direction:row;border-bottom:1px solid var(--line);}
+    .testi{flex:1;border-bottom:none;border-left:1px solid var(--line);padding:0 28px;}
+    .testi:first-child{border-left:none;}
+    .footer-top{flex-direction:row;justify-content:space-between;}
+    .bottom-row{flex-direction:row;justify-content:space-between;}
+  }
+  .icon-link{display:none;}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header>
+  <div class="wrap bar">
+    <a href="#top" class="logo" aria-label="InfiniteSignals home">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none"><path d="M4 18L10 8L14 14L20 4" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="4" r="2.4" fill="#3B82F6"/></svg>
+      InfiniteSignals
+    </a>
+    <nav class="primary-nav">
+      <a href="#markets">Markets</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://instagram.com/infinitesignals" class="btn btn-ghost btn-instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.7"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        Join on Instagram
+      </a>
+      <a href="https://t.me/infinitesignals" class="btn btn-telegram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.4L2.9 11.7c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8s.7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.7-.9l3.2-14.8c.3-1.3-.4-1.9-1.4-1.8z"/></svg>
+        Join on Telegram
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a class="nav-link" href="#markets">Markets</a>
+    <a class="nav-link" href="#how-it-works">How it works</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+    <div class="btn-row" style="flex-direction:column;">
+      <a href="https://t.me/infinitesignals" class="btn btn-telegram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.4L2.9 11.7c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8s.7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.7-.9l3.2-14.8c.3-1.3-.4-1.9-1.4-1.8z"/></svg>
+        Join on Telegram
+      </a>
+      <a href="https://instagram.com/infinitesignals" class="btn btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.7"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        Join on Instagram
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="hero" id="top">
+    <div class="glow glow-blue"></div>
+    <div class="glow glow-cyan"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Crypto & Forex signals on Telegram</div>
+        <h1>Trade the <span class="grad">signal</span>, not the noise.</h1>
+        <p class="lede">InfiniteSignals sends real-time entry, target, and stop-loss alerts for crypto and forex — straight to your Telegram, the moment a setup is confirmed.</p>
+        <div class="btn-row">
+          <a href="https://t.me/infinitesignals" class="btn btn-telegram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.4L2.9 11.7c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8s.7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.7-.9l3.2-14.8c.3-1.3-.4-1.9-1.4-1.8z"/></svg>
+            Join on Telegram
+          </a>
+          <a href="#markets" class="btn btn-ghost">See sample signals</a>
+        </div>
+        <p class="trust-line">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          No pump groups. No paid promotions. Every signal timestamped and archived.
+        </p>
+        <p class="also-on">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.7"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          Also on <a href="https://instagram.com/infinitesignals">Instagram</a> for recaps and highlights
+        </p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="tabs" role="tablist" aria-label="Sample signal by market">
+          <button class="tab-btn active" data-tab="crypto" role="tab" aria-selected="true">Crypto</button>
+          <button class="tab-btn" data-tab="forex" role="tab" aria-selected="false">Forex</button>
+        </div>
+
+        <div class="signal-card">
+          <div class="tab-panel active" data-panel="crypto">
+            <div class="signal-top">
+              <div><div class="pair">BTC/USDT</div><div class="live"><span class="live-dot"></span> Sent 2 minutes ago</div></div>
+              <span class="side-tag">LONG</span>
+            </div>
+            <div class="signal-rows">
+              <div class="signal-row"><span>Entry</span><span>61,240</span></div>
+              <div class="signal-row target"><span>Target 1</span><span>62,900</span></div>
+              <div class="signal-row target"><span>Target 2</span><span>64,150</span></div>
+              <div class="signal-row stop"><span>Stop-loss</span><span>59,800</span></div>
+            </div>
+            <p class="signal-note">Setup: high-volume breakout above the 4H range. Invalidated on a close below stop-loss.</p>
+          </div>
+
+          <div class="tab-panel" data-panel="forex">
+            <div class="signal-top">
+              <div><div class="pair">XAU/USD</div><div class="live"><span class="live-dot"></span> Sent 14 minutes ago</div></div>
+              <span class="side-tag">LONG</span>
+            </div>
+            <div class="signal-rows">
+              <div class="signal-row"><span>Entry</span><span>2,392.50</span></div>
+              <div class="signal-row target"><span>Target 1</span><span>2,401.00</span></div>
+              <div class="signal-row target"><span>Target 2</span><span>2,411.50</span></div>
+              <div class="signal-row stop"><span>Stop-loss</span><span>2,384.00</span></div>
+            </div>
+            <p class="signal-note">Setup: rejection off daily support with USD weakness ahead of CPI. MT4/MT5 formatted.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat"><div class="num">5–8</div><div class="label">Signals sent weekly</div></div>
+        <div class="stat"><div class="num">68%</div><div class="label">Hit Target 1</div></div>
+        <div class="stat"><div class="num">12.4k+</div><div class="label">Members on Telegram</div></div>
+        <div class="stat"><div class="num">2</div><div class="label">Markets: crypto & forex</div></div>
+      </div>
+      <p class="stats-footnote">Win-rate reflects publicly logged, closed signals over the past 90 days. Past performance does not guarantee future results.</p>
+    </div>
+  </div>
+
+  <section id="markets">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><span class="dot"></span>Markets covered</div>
+        <h2>One format, two markets.</h2>
+        <p>Every signal — whether it's a coin or a currency pair — follows the same structure: entry, targets, stop-loss, and the reasoning behind it.</p>
+      </div>
+      <div class="markets-grid">
+        <div class="market-card crypto">
+          <div class="market-head">
+            <div class="market-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.8 1.8 0 010 3.6h-4M9.5 14.5h4.5a1.8 1.8 0 010 3.6h-5"/></svg></div>
+            <div><h3>Crypto</h3><p>Spot and futures, any exchange</p></div>
+          </div>
+          <p style="font-size:14.5px;color:var(--muted);">Levels are set as price targets, not exchange-specific orders, so they work on Binance, Bybit, OKX, or wherever you trade.</p>
+          <div class="pair-chips">
+            <span class="chip">BTC/USDT</span><span class="chip">ETH/USDT</span><span class="chip">SOL/USDT</span><span class="chip">+12 more</span>
+          </div>
+        </div>
+        <div class="market-card forex">
+          <div class="market-head">
+            <div class="market-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 6h7v7"/></svg></div>
+            <div><h3>Forex</h3><p>Majors, minors, and metals</p></div>
+          </div>
+          <p style="font-size:14.5px;color:var(--muted);">Formatted for MT4 and MT5 with pip-accurate entries and stops, built around session volatility and news events.</p>
+          <div class="pair-chips">
+            <span class="chip">EUR/USD</span><span class="chip">GBP/USD</span><span class="chip">XAU/USD</span><span class="chip">+8 more</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><span class="dot"></span>How it works</div>
+        <h2>From join to filled order in three steps.</h2>
+        <p>No app to install beyond Telegram itself, and no account to create. Join the channel and you're set.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">01</div><div><h3>Join the Telegram channel</h3><p>Turn on notifications so alerts reach you the moment they post, not hours later buried in a feed.</p></div></div>
+        <div class="step"><div class="step-num">02</div><div><h3>Get the signal</h3><p>Each alert lists entry, targets, and stop-loss for crypto or forex, plus the reasoning behind the setup.</p></div></div>
+        <div class="step"><div class="step-num">03</div><div><h3>Manage your own trade</h3><p>Place the order on your own exchange or broker and follow the stop-loss. InfiniteSignals never holds funds or trades on your behalf.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap proof">
+      <div class="proof-quote">
+        "Every signal is timestamped and archived, so you can check the record yourself instead of taking our word for it."
+        <span class="cite">— How every alert is logged</span>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 8v6M2 12h6m8 0h6"/></svg><div><h4>Risk defined before reward</h4><p>Every signal ships with a stop-loss set before it's posted. If a setup can't be risk-managed, it doesn't get sent.</p></div></div>
+        <div class="feature-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><h4>Manual confirmation, not spam</h4><p>Automated screening flags setups across both markets; a trader reviews each one before it posts to Telegram.</p></div></div>
+        <div class="feature-item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><div><h4>Public track record</h4><p>Closed signals stay pinned in the Telegram channel — wins and losses both — so the record is checkable at any time.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="showcase">
+    <div class="wrap showcase">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-avatar"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M21.5 4.4L2.9 11.7c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8s.7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.7-.9l3.2-14.8c.3-1.3-.4-1.9-1.4-1.8z"/></svg></div>
+            <div><div class="phone-name">InfiniteSignals</div><div class="phone-sub">Telegram channel · 08:42</div></div>
+          </div>
+          <div class="dm-bubble">
+            <div class="pair mono">ETH/USDT · LONG</div>
+            <div class="dm-line"><span>Entry</span><b>3,180</b></div>
+            <div class="dm-line"><span>Target 1</span><b>3,260</b></div>
+            <div class="dm-line"><span>Stop-loss</span><b>3,110</b></div>
+          </div>
+          <div class="dm-bubble">
+            <div class="pair mono">GBP/USD · SHORT</div>
+            <div class="dm-line"><span>Entry</span><b>1.2740</b></div>
+            <div class="dm-line"><span>Target 1</span><b>1.2690</b></div>
+            <div class="dm-line"><span>Stop-loss</span><b>1.2775</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="showcase-text">
+        <div class="eyebrow"><span class="dot"></span>What you'll receive</div>
+        <h2>This is the entire signal — nothing hides behind "unlock for details."</h2>
+        <p class="muted" style="margin-top:12px;">Free to join, on both Telegram and Instagram. Every member sees the same format: entry, targets, and stop-loss, every time.</p>
+        <div class="btn-row" style="margin-top:20px;max-width:220px;">
+          <a href="https://t.me/infinitesignals" class="btn btn-ghost">Join on Telegram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><span class="dot"></span>From members</div>
+        <h2>Replace with real testimonials before launch.</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi"><p>"The stop-loss is always set before the entry hits the channel. That's the part most accounts skip."</p><div class="who">— Placeholder, Telegram member</div></div>
+        <div class="testi"><p>"First Telegram channel I've followed that posts forex and crypto in the exact same format."</p><div class="who">— Placeholder, Telegram member</div></div>
+        <div class="testi"><p>"I stopped following accounts that never show their losses. This one does."</p><div class="who">— Placeholder, Instagram follower</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap" style="max-width:760px;">
+      <div class="section-head">
+        <div class="eyebrow"><span class="dot"></span>FAQ</div>
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Is this financial advice?<span class="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="faq-a"><p>No. InfiniteSignals shares trade ideas for educational purposes only. Crypto and forex markets are volatile and every trade carries risk of loss — always size positions and manage risk yourself.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Do you cover forex, or only crypto?<span class="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="faq-a"><p>Both. InfiniteSignals posts crypto signals for major exchanges and forex signals for majors, minors, and metals like XAU/USD, formatted for MT4 and MT5.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Is InfiniteSignals on Telegram or Instagram?<span class="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="faq-a"><p>Telegram is the main channel where every signal is posted first. The Instagram page mirrors highlights and recaps, but Telegram is the fastest and most complete way to receive alerts.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">How often are signals sent?<span class="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="faq-a"><p>Between 5 and 8 signals per week across both markets, only when a setup meets the screening criteria.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Is it free to join?<span class="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="faq-a"><p>Yes. The Telegram channel and Instagram page are both free to join, with no paid tiers.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="final-cta">
+    <div class="glow glow-blue"></div>
+    <div class="wrap">
+      <h2>Stop trading on rumors. Start trading on tracked signals.</h2>
+      <p>Free to join. Every signal timestamped and logged — including the ones that don't hit target.</p>
+      <div class="btn-row">
+        <a href="https://t.me/infinitesignals" class="btn btn-telegram">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.4L2.9 11.7c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8s.7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.7-.9l3.2-14.8c.3-1.3-.4-1.9-1.4-1.8z"/></svg>
+          Join on Telegram
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a href="#top" class="logo"><svg class="logo-mark" viewBox="0 0 24 24" fill="none"><path d="M4 18L10 8L14 14L20 4" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="4" r="2.4" fill="#3B82F6"/></svg>InfiniteSignals</a>
+      <div class="footer-cols">
+        <div class="footer-col"><h5>Site</h5><a href="#markets">Markets</a><a href="#how-it-works">How it works</a><a href="#faq">FAQ</a></div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="https://t.me/infinitesignals"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.4L2.9 11.7c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8s.7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.7-.9l3.2-14.8c.3-1.3-.4-1.9-1.4-1.8z"/></svg>Telegram</a>
+          <a href="https://instagram.com/infinitesignals"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.7"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+          <a href="mailto:hello@infinitesignals.io">Email</a>
+        </div>
+      </div>
+    </div>
+    <p class="disclaimer">InfiniteSignals provides trade ideas for informational and educational purposes only and does not constitute financial advice. Trading cryptocurrency and forex involves substantial risk, including the potential loss of principal. Past performance of any signal does not guarantee future results. Always do your own research and trade within your means.</p>
+    <div class="bottom-row"><span>© 2026 InfiniteSignals. All rights reserved.</span><span>Placeholder links — swap in your real Telegram and Instagram URLs.</span></div>
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobilePanel = document.getElementById('mobilePanel');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobilePanel.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tab));
+    });
+  });
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const ans = item.querySelector('.faq-a');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+          other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        }
+      });
+      if (isOpen) { item.classList.remove('open'); ans.style.maxHeight = null; btn.setAttribute('aria-expanded', 'false'); }
+      else { item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+</script>
+
+</body>
+</html>
